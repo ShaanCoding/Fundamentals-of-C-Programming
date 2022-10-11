@@ -24,13 +24,11 @@
 /******************************************************************************
  * Function prototypes
  *****************************************************************************/
-int generate_semi_prime(long int tau);
-int calculate_d(int e, int n, int tau);
 int generateTau(long int p, long int q);
-void public_encryption_key(const long int p, const long int q, long *e_p, long *n_p);
-int private_encryption_key(long int p, long int q);
-int encrypt(int message, long int e, long int n);
-int decrypt(long int privateKey);
+long public_encryption_key(const long int p, const long int q, long n, long tau);
+long private_encryption_key(long int e, long int n, long int tau);
+long int encrypt(int message, long int e, long int n);
+long int decrypt(int cipheredText, long int d, long int n);
 int gcd(const int a, const int b);
 int testGCD(void);
 long long int modPow(long long int base, int power, int mod);
@@ -47,39 +45,28 @@ void main() {
    long int p = 7;
    long int q = 11;
 
-   long int e, n;
-   public_encryption_key(p, q, &e, &n);
+   long int n = p * q;
+   long int tau = generateTau(p, q);
 
-   printf("Public key is <%d, %d>\n", e, n);
+   printf("N = %ld\n", n);
+   printf("Tau = %ld\n", tau);
+
+   long int e = public_encryption_key(p, q, n, tau);
+   printf("Public key is <%ld, %ld>\n", e, n);
 
    // printf("GCD Unit Tests: %d\n", testGCD());
 
    int message = 9;
    // char message[] = "Hello World!";
    encrypt(message, e, n);
+ 
+   long d = private_encryption_key(e, n, tau);
+   printf("Private key is: <%ld, %ld>\n", d, n);
 
-
-   // /* Now determine private key */
-   // /* D*e % tau = 1 */
-   // int d = calculate_d(e, n, tau);
-
-   // printf("D in private key is: %d\n", d);
-   // printf("Private key is: <%d, %d>\n", d, n);
-
-   // /* Decrypted is m = c^d % n */
-   // // long decryptedText = (long) powl(cipheredText, d) % n;
-   // long long int decryptedText = modPow(cipheredText, d, n);
+   /* Decrypted is m = c^d % n */
+   int cipheredText = 37;
+   decrypt(cipheredText, d, n);
    // printf("Decrypted Text is: %d\n", decryptedText);
-}
-
-int calculate_d(int e, int n, int tau) {
-   int i, d;
-   for(i = 1; i <= n; i++) {
-      if(i * e % tau == 1) {
-         d = i;
-      }
-   }
-   return d;
 }
 
 /******************************************************************************
@@ -166,31 +153,6 @@ long long int modPow(long long int base, int power, int mod) {
    return result;
 }
 
-
-/******************************************************************************
- * This function takes in variables p & q and calculates a rough semiprime number
- * such that GCD(p, q) = 1
- * this program.
- * inputs:
- * - long int
- * outputs:
- * - int
- *****************************************************************************/
-int generate_semi_prime(long int tau) {
-   /* Calculate e < n such that n is relatively prime to tau */
-   /* Means e and tau have no common factor except 1 */
-   /* Choose such that 1 < e < tau, e is prime to tau */
-   int i, e = 0;
-   for(i = 2; i < tau; i++) {
-      if(gcd(i, tau) == 1) {
-         e = i;
-         break;
-      }
-   }
-
-   return e;
-}
-
 /******************************************************************************
  * This function takes in variables p & q and calculates tau
  * Tau is a variable used in the creation and calculation of private & public keys
@@ -213,20 +175,19 @@ int generateTau(long int p, long int q) {
  * outputs:
  * - public encryption key
  *****************************************************************************/
-void public_encryption_key(const long int p, const long int q, long *e_p, long *n_p) {
-   int n = p * q;
-   int tau = generateTau(p, q);
+long public_encryption_key(const long int p, const long int q, long n, long tau) {
+   /* Calculate e < n such that n is relatively prime to tau */
+   /* Means e and tau have no common factor except 1 */
+   /* Choose such that 1 < e < tau, e is prime to tau */
+   int i, e = 0;
+   for(i = 2; i < tau; i++) {
+      if(gcd(i, tau) == 1) {
+         e = i;
+         break;
+      }
+   }
 
-   printf("N = %d\n", n);
-   printf("Tau = %d\n", tau);
-
-   int e = generate_semi_prime(tau);
-   printf("E value: %d\n", e);
-
-   printf("Public key is <%d, %d>\n", e, n);
-
-   *e_p = e;
-   *n_p = n;
+   return e;
 }
 
 /******************************************************************************
@@ -237,9 +198,16 @@ void public_encryption_key(const long int p, const long int q, long *e_p, long *
  * outputs:
  * - private encryption key
  *****************************************************************************/
-int private_encryption_key(long int p, long int q) {
-   
-   return 1;
+long private_encryption_key(long int e, long int n, long int tau) {
+   /* Now determine private key */
+   /* D*e % tau = 1 */
+   int i, d;
+   for(i = 1; i <= n; i++) {
+      if(i * e % tau == 1) {
+         d = i;
+      }
+   }
+   return d;
 }
 
 /******************************************************************************
@@ -250,9 +218,7 @@ int private_encryption_key(long int p, long int q) {
  * outputs:
  * - encryptedText
  *****************************************************************************/
-int encrypt(int message, long int e, long int n) {
-
-
+long int encrypt(int message, long int e, long int n) {
    int cipheredText = (int) pow(message, e) % n;
    printf("Message is: %d\n", cipheredText); 
    return 1;
@@ -266,6 +232,9 @@ int encrypt(int message, long int e, long int n) {
  * outputs:
  * - decryptedText
  *****************************************************************************/
-int decrypt(long int privateKey) {
+long int decrypt(int cipheredText, long int d, long int n) {
+   /* Decrypted is m = c^d % n */
+   long int decryptedText = modPow(cipheredText, d, n);
+   printf("Decrypted Text is: %ld\n", decryptedText);
    return 1;
 }
