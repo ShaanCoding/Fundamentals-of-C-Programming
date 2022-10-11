@@ -1,5 +1,5 @@
 /**************************************************************
- * FileName: encryption.c
+ * FileName: encryption.c | https://www.javatpoint.com/rsa-encryption-algorithm
  * Description: This is encryption lib which contain some function
  to achieve encryption and decryption using RSA algorithm.
  * @Author: Mohammed Khan
@@ -27,9 +27,9 @@
 int generate_semi_prime(long int tau);
 int calculate_d(int e, int n, int tau);
 int generateTau(long int p, long int q);
-int public_encryption_key(long int p, long int q);
+void public_encryption_key(const long int p, const long int q, long *e_p, long *n_p);
 int private_encryption_key(long int p, long int q);
-int encrypt(long int publicKey);
+int encrypt(int message, long int e, long int n);
 int decrypt(long int privateKey);
 int gcd(const int a, const int b);
 int testGCD(void);
@@ -44,38 +44,32 @@ long long int modPow(long long int base, int power, int mod);
  *****************************************************************************/
 void main() {
    /* Need two random large prime numbers */
-   int p = 7;
-   int q = 11;
+   long int p = 7;
+   long int q = 11;
 
-   printf("GCD Unit Tests: %d\n", testGCD());
-
-   int n = p * q;
-   int tau = generateTau(p, q);
-
-   printf("N = %d\n", n);
-   printf("Tau = %d\n", tau);
-
-   int e = generate_semi_prime(tau);
-   printf("E value: %d\n", e);
+   long int e, n;
+   public_encryption_key(p, q, &e, &n);
 
    printf("Public key is <%d, %d>\n", e, n);
-   
+
+   // printf("GCD Unit Tests: %d\n", testGCD());
+
    int message = 9;
-   int cipheredText = (int) pow(message, e) % n;
+   // char message[] = "Hello World!";
+   encrypt(message, e, n);
 
-   printf("Message is: %d\n", cipheredText); 
 
-   /* Now determine private key */
-   /* D*e % tau = 1 */
-   int d = calculate_d(e, n, tau);
+   // /* Now determine private key */
+   // /* D*e % tau = 1 */
+   // int d = calculate_d(e, n, tau);
 
-   printf("D in private key is: %d\n", d);
-   printf("Private key is: <%d, %d>\n", d, n);
+   // printf("D in private key is: %d\n", d);
+   // printf("Private key is: <%d, %d>\n", d, n);
 
-   /* Decrypted is m = c^d % n */
-   // long decryptedText = (long) powl(cipheredText, d) % n;
-   long long int decryptedText = modPow(cipheredText, d, n);
-   printf("Decrypted Text is: %d\n", decryptedText);
+   // /* Decrypted is m = c^d % n */
+   // // long decryptedText = (long) powl(cipheredText, d) % n;
+   // long long int decryptedText = modPow(cipheredText, d, n);
+   // printf("Decrypted Text is: %d\n", decryptedText);
 }
 
 int calculate_d(int e, int n, int tau) {
@@ -219,8 +213,20 @@ int generateTau(long int p, long int q) {
  * outputs:
  * - public encryption key
  *****************************************************************************/
-int public_encryption_key(long int p, long int q) {
-   return 1;
+void public_encryption_key(const long int p, const long int q, long *e_p, long *n_p) {
+   int n = p * q;
+   int tau = generateTau(p, q);
+
+   printf("N = %d\n", n);
+   printf("Tau = %d\n", tau);
+
+   int e = generate_semi_prime(tau);
+   printf("E value: %d\n", e);
+
+   printf("Public key is <%d, %d>\n", e, n);
+
+   *e_p = e;
+   *n_p = n;
 }
 
 /******************************************************************************
@@ -232,6 +238,7 @@ int public_encryption_key(long int p, long int q) {
  * - private encryption key
  *****************************************************************************/
 int private_encryption_key(long int p, long int q) {
+   
    return 1;
 }
 
@@ -243,7 +250,11 @@ int private_encryption_key(long int p, long int q) {
  * outputs:
  * - encryptedText
  *****************************************************************************/
-int encrypt(long int publicKey) {
+int encrypt(int message, long int e, long int n) {
+
+
+   int cipheredText = (int) pow(message, e) % n;
+   printf("Message is: %d\n", cipheredText); 
    return 1;
 }
 
