@@ -10,6 +10,9 @@
     |Date           |           Description                    |  
     |2022-10-05     | Reformatted additional types after       |
     |               | reading more on RSA                      |
+    |Date           |           Description                    |  
+    |2022-10-11     | Implemented RSA encrypt + decrypt on     |
+    |               | integers using longs                     |
  **************************************************************/
 
 #include <stdio.h>
@@ -58,15 +61,14 @@ void main() {
 
    int message = 9;
    // char message[] = "Hello World!";
-   encrypt(message, e, n);
+   int cipheredText = encrypt(message, e, n);
+   printf("Message is: %d\n", cipheredText); 
  
    long d = private_encryption_key(e, n, tau);
    printf("Private key is: <%ld, %ld>\n", d, n);
 
-   /* Decrypted is m = c^d % n */
-   int cipheredText = 37;
-   decrypt(cipheredText, d, n);
-   // printf("Decrypted Text is: %d\n", decryptedText);
+   long decryptedText = decrypt(cipheredText, d, n);
+   printf("Decrypted Text is: %ld\n", decryptedText);
 }
 
 /******************************************************************************
@@ -219,9 +221,7 @@ long private_encryption_key(long int e, long int n, long int tau) {
  * - encryptedText
  *****************************************************************************/
 long int encrypt(int message, long int e, long int n) {
-   int cipheredText = (int) pow(message, e) % n;
-   printf("Message is: %d\n", cipheredText); 
-   return 1;
+   return (int) pow(message, e) % n;
 }
 
 /******************************************************************************
@@ -234,7 +234,8 @@ long int encrypt(int message, long int e, long int n) {
  *****************************************************************************/
 long int decrypt(int cipheredText, long int d, long int n) {
    /* Decrypted is m = c^d % n */
-   long int decryptedText = modPow(cipheredText, d, n);
-   printf("Decrypted Text is: %ld\n", decryptedText);
-   return 1;
+   return modPow(cipheredText, d, n);
 }
+
+/* Need to convert string to byte array and then decode later */
+/* Maybe load as 73 82 19 20 24 -> Decode to APPLE or something */
