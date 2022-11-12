@@ -13,28 +13,12 @@
     |Date           |           Description                    |  
     |2022-10-11     | Implemented RSA encrypt + decrypt on     |
     |               | integers using longs                     |
+    |Date           |           Description                    |  
+    |2022-10-11     | Fixed segfault issue due to improperly   |
+    |               | allocating memory                        |
  **************************************************************/
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-
-/******************************************************************************
- * List preprocessing directives - you may define your own.
- *****************************************************************************/
-
-/******************************************************************************
- * Function prototypes
- *****************************************************************************/
-int generateTau(long int p, long int q);
-long public_encryption_key(const long int p, const long int q, long n, long tau);
-long private_encryption_key(long int e, long int n, long int tau);
-long int encrypt(int message, long int e, long int n);
-long int decrypt(int cipheredText, long int d, long int n);
-int gcd(const int a, const int b);
-int testGCD(void);
-long long int modPow(long long int base, int power, int mod);
+#include "encryption.h"
 
 /******************************************************************************
  * This is the main function and contains a demo of encryption
@@ -43,10 +27,11 @@ long long int modPow(long long int base, int power, int mod);
  * outputs:
  * - void
  *****************************************************************************/
-void main() {
-   /* Need two random large prime numbers */
-   long int p = 7;
-   long int q = 11;
+
+/*
+int main() {
+   long int p = 37;
+   long int q = 31;
 
    long int n = p * q;
    long int tau = generateTau(p, q);
@@ -57,19 +42,31 @@ void main() {
    long int e = public_encryption_key(p, q, n, tau);
    printf("Public key is <%ld, %ld>\n", e, n);
 
-   // printf("GCD Unit Tests: %d\n", testGCD());
-
-   int message = 9;
-   // char message[] = "Hello World!";
-   int cipheredText = encrypt(message, e, n);
-   printf("Message is: %d\n", cipheredText); 
+   char message[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!";
+   int i;
+   for(i = 0; i < strlen(message); i++) {
+      printf("%c", message[i]);
+   }
+   printf("\n");
+   
+   int* encrypted_string = encrypt(message, e, n);
+   for(i = 0; i < 27; i++) {
+      printf("%d ", encrypted_string[i]);
+   }
+   printf("\n");
  
    long d = private_encryption_key(e, n, tau);
    printf("Private key is: <%ld, %ld>\n", d, n);
 
-   long decryptedText = decrypt(cipheredText, d, n);
-   printf("Decrypted Text is: %ld\n", decryptedText);
+   char* decrypted_string = decrypt(encrypted_string, d, n);
+   printf("%s\n", decrypted_string);
+
+   free(encrypted_string);
+   free(decrypted_string);
+
+   return 0;
 }
+*/
 
 /******************************************************************************
  * This function takes in A & B and returns the GCD (Greatest common denominator)
@@ -101,47 +98,10 @@ int gcd(const int a, const int b) {
       }
    }
 
+   if(__detail){
+      printf("Calculating GCD: A: %d, B: %d, GCD: %d\n", a, b, gcd);
+   }
    return gcd;
-}
-
-/* Temporary to remove later tests values copied from stackoverflow */
-int testGCD() {
-   if(gcd(42, 56) != 14) {
-      printf("1\n");
-      return 0;
-   }
-
-   if(gcd(461952, 116298) != 18) {
-      printf("2\n");
-      return 0;
-   }
-
-   if(gcd(7966496, 314080416) != 32) {
-      printf("3\n");
-      return 0;
-   }
-
-   if(gcd(24826148, 45296490) != 526) {
-      printf("4\n");
-      return 0;
-   }
-
-   if(gcd(12, 0) != 0) {
-      printf("5\n");
-      return 0;
-   }
-
-   if(gcd(0, 0) != 0) {
-      printf("6\n");
-      return 0;
-   }
-
-   if(gcd(0, 9) != 0) {
-      printf("7\n");
-      return 0;
-   }
-
-   return 1;
 }
 
 long long int modPow(long long int base, int power, int mod) {
@@ -150,6 +110,11 @@ long long int modPow(long long int base, int power, int mod) {
 
    for(i = 0; i < power; i++) {
       result = (result * base) % mod;
+   }
+
+   if(__detail)
+   {
+   printf("Modulus Power Calculator. Base: %lld, Power: %d, Modulus: %d\n", base, power, mod);
    }
 
    return result;
@@ -166,7 +131,11 @@ long long int modPow(long long int base, int power, int mod) {
  * - int
  *****************************************************************************/
 int generateTau(long int p, long int q) {
-   return (p - 1) * (q - 1);
+   long int tau = (p - 1) * (q - 1);
+   if(__detail){
+      printf("Tau Calculator. P: %ld, Q: %ld, TAU: %ld\n", p, q, tau);
+   }
+   return tau;
 }
 
 /******************************************************************************
@@ -189,6 +158,9 @@ long public_encryption_key(const long int p, const long int q, long n, long tau)
       }
    }
 
+   if(__detail){
+      printf("Public Encryption Key Calculator. P: %ld, Q: %ld, N: %ld, TAU: %ld, E: %d\n", p, q, n, tau, e);
+   }
    return e;
 }
 
@@ -209,6 +181,12 @@ long private_encryption_key(long int e, long int n, long int tau) {
          d = i;
       }
    }
+
+   if(__detail){
+      printf("Private Encryption Key Calculator. E: %ld, N: %ld, TAU: %ld, D: %d\n", e, n, tau, d);
+   }
+
+
    return d;
 }
 
@@ -220,8 +198,16 @@ long private_encryption_key(long int e, long int n, long int tau) {
  * outputs:
  * - encryptedText
  *****************************************************************************/
-long int encrypt(int message, long int e, long int n) {
-   return (int) pow(message, e) % n;
+int* encrypt(char message[], const long int e, const long int n) {
+   int i, array_length = strlen(message);
+   int* returnString = malloc(array_length * sizeof(int));
+
+   for(i = 0; i < array_length; i++) {
+      int messageChar = message[i];
+      returnString[i] = (long long int) pow(messageChar, e) % n;
+   }
+
+   return returnString;
 }
 
 /******************************************************************************
@@ -232,10 +218,48 @@ long int encrypt(int message, long int e, long int n) {
  * outputs:
  * - decryptedText
  *****************************************************************************/
-long int decrypt(int cipheredText, long int d, long int n) {
+char* decrypt(int* cipheredText, long int d, long int n) {
    /* Decrypted is m = c^d % n */
-   return modPow(cipheredText, d, n);
+   int i;
+
+   char* returnString = malloc(27 * sizeof(char) + 1);
+
+   for(i = 0; i < 27; i++) {
+      int messageChar = cipheredText[i];
+      char decodedChar = modPow(messageChar, d, n);
+      returnString[i] = decodedChar;
+   }
+   return returnString; 
 }
 
 /* Need to convert string to byte array and then decode later */
 /* Maybe load as 73 82 19 20 24 -> Decode to APPLE or something */
+
+void initializeEncryption(long int* e_p, long int* n_p, long int* tau_p) {
+    long int p = 37;
+    long int q = 31;
+
+    long int n = p * q;
+    long int tau = generateTau(p, q);
+    long int e = public_encryption_key(p, q, n, tau);
+    
+    if(__detail){
+      printf("N = %ld\n", n);
+      printf("Tau = %ld\n", tau);
+      printf("Public key is <%ld, %ld>\n", e, n);
+    }
+    *e_p = e;
+    *n_p = n;
+    *tau_p = tau;
+}
+
+void convertStringToIntArray(char stringToUpdate[], int integerArray[]) {
+   int length = 0, c, bytesread;
+
+   char* input1 = stringToUpdate;
+
+   while(sscanf(input1, "%d%n", &c, &bytesread) > 0) {
+      integerArray[length++] = c;
+      input1 += bytesread;
+   }
+}
