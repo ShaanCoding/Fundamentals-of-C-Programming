@@ -63,15 +63,23 @@ void startApplication(student_t admissionList[], int* admissionIndex, student_t 
 			break;
 		case 2:
 			/* Call student card */
+			studentCard(studentCardList, studentCardIndex);
+			startApplication(admissionList, admissionIndex, studentCardList, studentCardIndex, enrollmentAndCourseAdviseList, enrollmentAndCourseAdviseIndex, travelConcessionList, travelConcessionIndex, resultAndGraduationsList, resultAndGraduationsIndex);
 			break;
 		case 3:
 			/* Call enrollment and course advise */
+			enrollmentCourseAdvise(enrollmentAndCourseAdviseList, enrollmentAndCourseAdviseIndex);
+			startApplication(admissionList, admissionIndex, studentCardList, studentCardIndex, enrollmentAndCourseAdviseList, enrollmentAndCourseAdviseIndex, travelConcessionList, travelConcessionIndex, resultAndGraduationsList, resultAndGraduationsIndex);
 			break;
 		case 4:
 			/* Call travel concession */
+			travelConcession(travelConcessionList, travelConcessionIndex);
+			startApplication(admissionList, admissionIndex, studentCardList, studentCardIndex, enrollmentAndCourseAdviseList, enrollmentAndCourseAdviseIndex, travelConcessionList, travelConcessionIndex, resultAndGraduationsList, resultAndGraduationsIndex);
 			break;
 		case 5:
 			/* Call result and graduation */
+			resultAndGraduation(resultAndGraduationsList, resultAndGraduationsIndex);
+			startApplication(admissionList, admissionIndex, studentCardList, studentCardIndex, enrollmentAndCourseAdviseList, enrollmentAndCourseAdviseIndex, travelConcessionList, travelConcessionIndex, resultAndGraduationsList, resultAndGraduationsIndex);
 			break;
 		case 6:
 			/* Exit */
@@ -82,18 +90,6 @@ void startApplication(student_t admissionList[], int* admissionIndex, student_t 
 			startApplication(admissionList, admissionIndex, studentCardList, studentCardIndex, enrollmentAndCourseAdviseList, enrollmentAndCourseAdviseIndex, travelConcessionList, travelConcessionIndex, resultAndGraduationsList, resultAndGraduationsIndex);
 		break;
 	}
-}
-
-void displayAdmissionMenu() {
-	clear();
-	drawTopLine();
-	drawTitle("Admission");
-	drawBottomLine();
-	drawBody("1. Book a ticket");
-	drawBody("2. View Admission Queue");
-	drawBody("3. Cancel Admission");
-	drawBody("4. Back");
-	drawBottomLine();
 }
 
 void createStudent(student_t studentList[] , int* studentIndex) {
@@ -192,6 +188,19 @@ void cancelQueue(student_t studentList[], int* studentIndex, char title[]) {
 	readkey("Press any key to continue...");
 }
 
+
+void displayAdmissionMenu() {
+	clear();
+	drawTopLine();
+	drawTitle("Admission");
+	drawBottomLine();
+	drawBody("1. Book a ticket");
+	drawBody("2. View Admission Queue");
+	drawBody("3. Cancel Admission");
+	drawBody("4. Back");
+	drawBottomLine();
+}
+
 void bookUniversityAdmission(student_t admissionList[], int* admissionIndex) {
 	createStudent(admissionList, admissionIndex);
 	printfSuccess("Admission booked successfully");
@@ -237,3 +246,234 @@ void admission(student_t admissionList[], int* admissionIndex) {
 	}
 }
 
+/* Student Card */
+void displayStudentCardMenu() {
+	clear();
+	drawTopLine();
+	drawTitle("Student Card");
+	drawBottomLine();
+	drawBody("1. Book a ticket");
+	drawBody("2. View Student Card Queue");
+	drawBody("3. Cancel Student Card");
+	drawBody("4. Back");
+	drawBottomLine();
+}
+
+void bookStudentCard(student_t studentCardList[], int* studentCardIndex) {
+	createStudent(studentCardList, studentCardIndex);
+	printfSuccess("Student card booked successfully");
+	readkey("Press any key to continue...");
+}
+
+void cancelStudentCard(student_t studentCardList[], int* studentCardIndex) {
+	cancelQueue(studentCardList, studentCardIndex, "Student Card");
+}
+
+/* Student Card */
+void studentCard(student_t studentCardList[], int* studentCardIndex) {
+	/* Call student card application */
+	displayStudentCardMenu();
+
+	/* Get user input */
+	int choice = readInt("Enter your choice: ");
+
+	switch(choice) {
+		case 1:
+			/* Call book a ticket */
+			bookStudentCard(studentCardList, studentCardIndex);
+			studentCard(studentCardList, studentCardIndex);
+			break;
+		case 2:
+			/* Call enter some bs input for admissionForm i.e specific data types / questions */
+			listQueue(studentCardList, studentCardIndex, "Student Card Queue");
+			studentCard(studentCardList, studentCardIndex);
+			break;
+		case 3:
+			/* Cancel student card */
+			cancelStudentCard(studentCardList, studentCardIndex);
+			studentCard(studentCardList, studentCardIndex);
+			break;
+		case 4:
+			/* Call main menu */
+			break;
+		default:
+			printfError("Invalid choice");
+			readkey("Press any key to continue...");
+			studentCard(studentCardList, studentCardIndex);
+		break;
+	}
+}
+
+/* EnrollmentCourseAdvise */
+void displayEnrollmentCourseAdviseMenu() {
+	clear();
+	drawTopLine();
+	drawTitle("Enrollment Course Advise");
+	drawBottomLine();
+	drawBody("1. Book a ticket");
+	drawBody("2. View Enrollment Course Advise Queue");
+	drawBody("3. Cancel Enrollment Course Advise");
+	drawBody("4. Back");
+	drawBottomLine();
+}
+
+void bookEnrollmentCourseAdvise(student_t enrollmentCourseAdviseList[], int* enrollmentCourseAdviseIndex) {
+	createStudent(enrollmentCourseAdviseList, enrollmentCourseAdviseIndex);
+	printfSuccess("Enrollment course advise booked successfully");
+	readkey("Press any key to continue...");
+}
+
+void cancelEnrollmentCourseAdvise(student_t enrollmentCourseAdviseList[], int* enrollmentCourseAdviseIndex) {
+	cancelQueue(enrollmentCourseAdviseList, enrollmentCourseAdviseIndex, "Enrollment Course Advise");
+}
+
+/* EnrollmentCourseAdvise */
+void enrollmentCourseAdvise(student_t enrollmentCourseAdviseList[], int* enrollmentCourseAdviseIndex) {
+	/* Call enrollment course advise application */
+	displayEnrollmentCourseAdviseMenu();
+
+	/* Get user input */
+	int choice = readInt("Enter your choice: ");
+
+	switch(choice) {
+		case 1:
+			/* Call book a ticket */
+			bookEnrollmentCourseAdvise(enrollmentCourseAdviseList, enrollmentCourseAdviseIndex);
+			enrollmentCourseAdvise(enrollmentCourseAdviseList, enrollmentCourseAdviseIndex);
+			break;
+		case 2:
+			/* Call enter some bs input for admissionForm i.e specific data types / questions */
+			listQueue(enrollmentCourseAdviseList, enrollmentCourseAdviseIndex, "Enrollment Course Advise Queue");
+			enrollmentCourseAdvise(enrollmentCourseAdviseList, enrollmentCourseAdviseIndex);
+			break;
+		case 3:
+			/* Cancel enrollment course advise */
+			cancelEnrollmentCourseAdvise(enrollmentCourseAdviseList, enrollmentCourseAdviseIndex);
+			enrollmentCourseAdvise(enrollmentCourseAdviseList, enrollmentCourseAdviseIndex);
+			break;
+		case 4:
+			/* Call main menu */
+			break;
+		default:
+			printfError("Invalid choice");
+			readkey("Press any key to continue...");
+			enrollmentCourseAdvise(enrollmentCourseAdviseList, enrollmentCourseAdviseIndex);
+		break;
+	}
+}
+
+/* TravelConcession */
+void displayTravelConcessionMenu() {
+	clear();
+	drawTopLine();
+	drawTitle("Travel Concession");
+	drawBottomLine();
+	drawBody("1. Book a ticket");
+	drawBody("2. View Travel Concession Queue");
+	drawBody("3. Cancel Travel Concession");
+	drawBody("4. Back");
+	drawBottomLine();
+}
+
+void bookTravelConcession(student_t travelConcessionList[], int* travelConcessionIndex) {
+	createStudent(travelConcessionList, travelConcessionIndex);
+	printfSuccess("Travel concession booked successfully");
+	readkey("Press any key to continue...");
+}
+
+void cancelTravelConcession(student_t travelConcessionList[], int* travelConcessionIndex) {
+	cancelQueue(travelConcessionList, travelConcessionIndex, "Travel Concession");
+}
+
+/* TravelConcession */
+void travelConcession(student_t travelConcessionList[], int* travelConcessionIndex) {
+	/* Call travel concession application */
+	displayTravelConcessionMenu();
+
+	/* Get user input */
+	int choice = readInt("Enter your choice: ");
+
+	switch(choice) {
+		case 1:
+			/* Call book a ticket */
+			bookTravelConcession(travelConcessionList, travelConcessionIndex);
+			travelConcession(travelConcessionList, travelConcessionIndex);
+			break;
+		case 2:
+			/* Call enter some bs input for admissionForm i.e specific data types / questions */
+			listQueue(travelConcessionList, travelConcessionIndex, "Travel Concession Queue");
+			travelConcession(travelConcessionList, travelConcessionIndex);
+			break;
+		case 3:
+			/* Cancel travel concession */
+			cancelTravelConcession(travelConcessionList, travelConcessionIndex);
+			travelConcession(travelConcessionList, travelConcessionIndex);
+			break;
+		case 4:
+			/* Call main menu */
+			break;
+		default:
+			printfError("Invalid choice");
+			readkey("Press any key to continue...");
+			travelConcession(travelConcessionList, travelConcessionIndex);
+		break;
+	}
+}
+
+/* ResultAndGraduation */
+void displayResultAndGraduationMenu() {
+	clear();
+	drawTopLine();
+	drawTitle("Result And Graduation");
+	drawBottomLine();
+	drawBody("1. Book a ticket");
+	drawBody("2. View Result And Graduation Queue");
+	drawBody("3. Cancel Result And Graduation");
+	drawBody("4. Back");
+	drawBottomLine();
+}
+
+void bookResultAndGraduation(student_t resultAndGraduationList[], int* resultAndGraduationIndex) {
+	createStudent(resultAndGraduationList, resultAndGraduationIndex);
+	printfSuccess("Result and graduation booked successfully");
+	readkey("Press any key to continue...");
+}
+
+void cancelResultAndGraduation(student_t resultAndGraduationList[], int* resultAndGraduationIndex) {
+	cancelQueue(resultAndGraduationList, resultAndGraduationIndex, "Result And Graduation");
+}
+
+/* ResultAndGraduation */
+void resultAndGraduation(student_t resultAndGraduationList[], int* resultAndGraduationIndex) {
+	/* Call result and graduation application */
+	displayResultAndGraduationMenu();
+
+	/* Get user input */
+	int choice = readInt("Enter your choice: ");
+
+	switch(choice) {
+		case 1:
+			/* Call book a ticket */
+			bookResultAndGraduation(resultAndGraduationList, resultAndGraduationIndex);
+			resultAndGraduation(resultAndGraduationList, resultAndGraduationIndex);
+			break;
+		case 2:
+			/* Call enter some bs input for admissionForm i.e specific data types / questions */
+			listQueue(resultAndGraduationList, resultAndGraduationIndex, "Result And Graduation Queue");
+			resultAndGraduation(resultAndGraduationList, resultAndGraduationIndex);
+			break;
+		case 3:
+			/* Cancel result and graduation */
+			cancelResultAndGraduation(resultAndGraduationList, resultAndGraduationIndex);
+			resultAndGraduation(resultAndGraduationList, resultAndGraduationIndex);
+			break;
+		case 4:
+			/* Call main menu */
+			break;
+		default:
+			printfError("Invalid choice");
+			readkey("Press any key to continue...");
+			resultAndGraduation(resultAndGraduationList, resultAndGraduationIndex);
+		break;
+	}
+}

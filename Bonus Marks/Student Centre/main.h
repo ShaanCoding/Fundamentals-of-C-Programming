@@ -37,3 +37,20 @@ void listQueue(student_t studentList[], int* studentIndex, char title[]);
 void cancelQueue(student_t studentList[], int* studentIndex, char title[]);
 void bookUniversityAdmission(student_t admissionList[], int* admissionIndex);
 void admission(student_t admissionList[], int* admissionIndex);
+
+void displayStudentCardMenu();
+void bookStudentCard(student_t studentCardList[], int* studentCardIndex);
+void studentCard(student_t studentCardList[], int* studentCardIndex);
+
+void displayEnrollmentAndCourseAdviseMenu();
+void bookEnrollmentAndCourseAdvise(student_t enrollmentAndCourseAdviseList[], int* enrollmentAndCourseAdviseIndex);
+void enrollmentCourseAdvise(student_t enrollmentAndCourseAdviseList[], int* enrollmentAndCourseAdviseIndex);
+
+void displayTravelConcessionMenu();
+void bookTravelConcession(student_t travelConcessionList[], int* travelConcessionIndex);
+void travelConcession(student_t travelConcessionList[], int* travelConcessionIndex);
+
+void displayResultAndGraduationMenu();
+void bookResultAndGraduation(student_t resultAndGraduationsList[], int* resultAndGraduationsIndex);
+void resultAndGraduation(student_t resultAndGraduationsList[], int* resultAndGraduationsIndex);
+
