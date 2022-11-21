@@ -44,8 +44,9 @@ void displayMenu(void) {
 	drawBody("3. Enrollment and Course Advise");
 	drawBody("4. Travel Concessions");
 	drawBody("5. Result and Graduation");
-	drawBody("6. Display All Bookings");
-	drawBody("7. Exit");
+	drawBody("6. View Student Details");
+	drawBody("7. Display All Bookings");
+	drawBody("8. Exit");
 	drawBottomLine();
 }
 
@@ -83,11 +84,15 @@ void startApplication(student_t admissionList[], int* admissionIndex, student_t 
 			startApplication(admissionList, admissionIndex, studentCardList, studentCardIndex, enrollmentAndCourseAdviseList, enrollmentAndCourseAdviseIndex, travelConcessionList, travelConcessionIndex, resultAndGraduationsList, resultAndGraduationsIndex);
 			break;
 		case 6:
+			/* Call viewStudentHistory */
+			viewStudentHistory(admissionList, admissionIndex, studentCardList, studentCardIndex, enrollmentAndCourseAdviseList, enrollmentAndCourseAdviseIndex, travelConcessionList, travelConcessionIndex, resultAndGraduationsList, resultAndGraduationsIndex);
+			startApplication(admissionList, admissionIndex, studentCardList, studentCardIndex, enrollmentAndCourseAdviseList, enrollmentAndCourseAdviseIndex, travelConcessionList, travelConcessionIndex, resultAndGraduationsList, resultAndGraduationsIndex);
+		case 7:
 			/* Call display all bookings */
 			displayAllBookingRecords(admissionList, admissionIndex, studentCardList, studentCardIndex, enrollmentAndCourseAdviseList, enrollmentAndCourseAdviseIndex, travelConcessionList, travelConcessionIndex, resultAndGraduationsList, resultAndGraduationsIndex);
 			startApplication(admissionList, admissionIndex, studentCardList, studentCardIndex, enrollmentAndCourseAdviseList, enrollmentAndCourseAdviseIndex, travelConcessionList, travelConcessionIndex, resultAndGraduationsList, resultAndGraduationsIndex);
 			break;
-		case 7:
+		case 8:
 			/* Exit */
 			break;
 		default:
@@ -108,33 +113,41 @@ void displayAllBookingRecords(student_t admissionList[], int* admissionIndex, st
 	drawTopLine();
 	drawBody("Admission");
 	for(i = 0; i < *admissionIndex; i++) {
-		char buffer[100];
-		sprintf(buffer, "%d. %s", i + 1, admissionList[i].name);
+		char buffer[200];
+		sprintf(buffer, "%d. %s | %s", i + 1, admissionList[i].name, admissionList[i].studentID);
 		drawBody(buffer);
 	}
 	drawBottomLine();
 	drawTopLine();
 	drawBody("Student Card");
 	for(i = 0; i < *studentCardIndex; i++) {
-		printf("%d. %s\n", i + 1, studentCardList[i].name);
+		char buffer[200];
+		sprintf(buffer, "%d. %s | %s", i + 1, studentCardList[i].name, studentCardList[i].studentID);
+		drawBody(buffer);
 	}
 	drawBottomLine();
 	drawTopLine();
 	drawBody("Enrollment and Course Advise");
 	for(i = 0; i < *enrollmentAndCourseAdviseIndex; i++) {
-		printf("%d. %s\n", i + 1, enrollmentAndCourseAdviseList[i].name);
+		char buffer[200];
+		sprintf(buffer, "%d. %s | %s", i + 1, enrollmentAndCourseAdviseList[i].name, enrollmentAndCourseAdviseList[i].studentID);
+		drawBody(buffer);
 	}
 	drawBottomLine();
 	drawTopLine();
 	drawBody("Travel Concession");
 	for(i = 0; i < *travelConcessionIndex; i++) {
-		printf("%d. %s\n", i + 1, travelConcessionList[i].name);
+		char buffer[200];
+		sprintf(buffer, "%d. %s | %s", i + 1, travelConcessionList[i].name, travelConcessionList[i].studentID);
+		drawBody(buffer);
 	}
 	drawBottomLine();
 	drawTopLine();
 	drawBody("Result and Graduation");
 	for(i = 0; i < *resultAndGraduationsIndex; i++) {
-		printf("%d. %s\n", i + 1, resultAndGraduationsList[i].name);
+		char buffer[200];
+		sprintf(buffer, "%d. %s | %s", i + 1, resultAndGraduationsList[i].name, resultAndGraduationsList[i].studentID);
+		drawBody(buffer);
 	}
 	drawBottomLine();
 	readkey("Press any key to continue...");
@@ -216,7 +229,9 @@ void listQueue(student_t studentList[], int* studentIndex, char title[]) {
 		drawBody(buffer);
 		int i;
 		for(i = 0; i < *studentIndex; i++) {
-			drawBody(studentList[i].name);
+			char buffer[200];
+			sprintf(buffer, "%d. %s | %s", i + 1, studentList[i].name, studentList[i].studentID);
+			drawBody(buffer);
 		}
 	}
 	
@@ -532,4 +547,139 @@ void resultAndGraduation(student_t resultAndGraduationList[], int* resultAndGrad
 			resultAndGraduation(resultAndGraduationList, resultAndGraduationIndex);
 		break;
 	}
+}
+
+/* View Student History */
+void viewStudentHistory(student_t admissionList[], int* admissionIndex, student_t studentCardList[], int* studentCardIndex, student_t enrollmentAndCourseAdviseList[], int* enrollmentAndCourseAdviseIndex, student_t travelConcessionList[], int* travelConcessionIndex, student_t resultAndGraduationsList[], int* resultAndGraduationsIndex) {
+	char* studentID = readString("Select student ID: ");
+
+	/* Print all entries for specific student */
+	clear();
+	drawTopLine();
+
+	drawTitle("Student History");
+	drawBottomLine();
+
+	int hasIDBeenFound = 0;
+
+	int i;
+	for(i = 0; i < *admissionIndex; i++) {
+		/* If we find equal strings */
+		if(strcmp(admissionList[i].studentID, studentID) == 0) {
+			char buffer[100];
+			sprintf(buffer, "Student ID: %s", admissionList[i].studentID);
+			drawBody(buffer);
+			sprintf(buffer, "Student Name: %s", admissionList[i].name);
+			drawBody(buffer);
+			sprintf(buffer, "Student Address: %s", admissionList[i].address);
+			drawBody(buffer);
+			sprintf(buffer, "Student Phone: %s", admissionList[i].phone);
+			drawBody(buffer);
+			sprintf(buffer, "Student Email: %s", admissionList[i].email);
+			drawBody(buffer);
+			sprintf(buffer, "Student Course: %s", admissionList[i].course);
+			drawBody(buffer);
+			hasIDBeenFound = 1;
+		}
+	}
+
+	if(hasIDBeenFound == 0) {
+		i = 0;
+		for(i = 0; i < *studentCardIndex; i++) {
+			/* If we find equal strings */
+			if(strcmp(studentCardList[i].studentID, studentID) == 0) {
+				char buffer[100];
+				sprintf(buffer, "Student ID: %s", studentCardList[i].studentID);
+				drawBody(buffer);
+				sprintf(buffer, "Student Name: %s", studentCardList[i].name);
+				drawBody(buffer);
+				sprintf(buffer, "Student Address: %s", studentCardList[i].address);
+				drawBody(buffer);
+				sprintf(buffer, "Student Phone: %s", studentCardList[i].phone);
+				drawBody(buffer);
+				sprintf(buffer, "Student Email: %s", studentCardList[i].email);
+				drawBody(buffer);
+				sprintf(buffer, "Student Course: %s", studentCardList[i].course);
+				drawBody(buffer);
+				hasIDBeenFound = 1;
+			}
+		}
+	}
+
+	if(hasIDBeenFound == 0) {
+		i = 0;
+		for(i = 0; i < *enrollmentAndCourseAdviseIndex; i++) {
+			/* If we find equal strings */
+			if(strcmp(enrollmentAndCourseAdviseList[i].studentID, studentID) == 0) {
+				char buffer[100];
+				sprintf(buffer, "Student ID: %s", enrollmentAndCourseAdviseList[i].studentID);
+				drawBody(buffer);
+				sprintf(buffer, "Student Name: %s", enrollmentAndCourseAdviseList[i].name);
+				drawBody(buffer);
+				sprintf(buffer, "Student Address: %s", enrollmentAndCourseAdviseList[i].address);
+				drawBody(buffer);
+				sprintf(buffer, "Student Phone: %s", enrollmentAndCourseAdviseList[i].phone);
+				drawBody(buffer);
+				sprintf(buffer, "Student Email: %s", enrollmentAndCourseAdviseList[i].email);
+				drawBody(buffer);
+				sprintf(buffer, "Student Course: %s", enrollmentAndCourseAdviseList[i].course);
+				drawBody(buffer);
+				hasIDBeenFound = 1;
+			}
+		}
+	}
+
+	if(hasIDBeenFound == 0) {
+		i = 0;
+		for(i = 0; i < *travelConcessionIndex; i++) {
+			/* If we find equal strings */
+			if(strcmp(travelConcessionList[i].studentID, studentID) == 0) {
+				char buffer[100];
+				sprintf(buffer, "Student ID: %s", travelConcessionList[i].studentID);
+				drawBody(buffer);
+				sprintf(buffer, "Student Name: %s", travelConcessionList[i].name);
+				drawBody(buffer);
+				sprintf(buffer, "Student Address: %s", travelConcessionList[i].address);
+				drawBody(buffer);
+				sprintf(buffer, "Student Phone: %s", travelConcessionList[i].phone);
+				drawBody(buffer);
+				sprintf(buffer, "Student Email: %s", travelConcessionList[i].email);
+				drawBody(buffer);
+				sprintf(buffer, "Student Course: %s", travelConcessionList[i].course);
+				drawBody(buffer);
+				hasIDBeenFound = 1;
+			}
+		}
+	}
+
+	if(hasIDBeenFound == 0) {
+		i = 0;
+		for(i = 0; i < *resultAndGraduationsIndex; i++) {
+			/* If we find equal strings */
+			if(strcmp(resultAndGraduationsList[i].studentID, studentID) == 0) {
+				char buffer[100];
+				sprintf(buffer, "Student ID: %s", resultAndGraduationsList[i].studentID);
+				drawBody(buffer);
+				sprintf(buffer, "Student Name: %s", resultAndGraduationsList[i].name);
+				drawBody(buffer);
+				sprintf(buffer, "Student Address: %s", resultAndGraduationsList[i].address);
+				drawBody(buffer);
+				sprintf(buffer, "Student Phone: %s", resultAndGraduationsList[i].phone);
+				drawBody(buffer);
+				sprintf(buffer, "Student Email: %s", resultAndGraduationsList[i].email);
+				drawBody(buffer);
+				sprintf(buffer, "Student Course: %s", resultAndGraduationsList[i].course);
+				drawBody(buffer);
+				hasIDBeenFound = 1;
+			}
+		}
+	}
+
+	if(hasIDBeenFound == 0) {
+		drawBody("Student ID has no entry in the database.");
+	}
+
+	drawBottomLine();
+
+	readkey("Press any key to continue...");
 }

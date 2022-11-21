@@ -29,12 +29,15 @@ typedef struct student student_t;
 
 /* Function prototypes */
 int main(void);
+
 void displayMenu(void);
 void startApplication(student_t admissionList[], int* admissionIndex, student_t studentCardList[], int* studentCardIndex, student_t enrollmentAndCourseAdviseList[], int* enrollmentAndCourseAdviseIndex, student_t travelConcessionList[], int* travelConcessionIndex, student_t resultAndGraduationsList[], int* resultAndGraduationsIndex);
-void displayAdmissionMenu(void);
+
 void createStudent(student_t studentList[] , int* studentIndex);
 void listQueue(student_t studentList[], int* studentIndex, char title[]);
 void cancelQueue(student_t studentList[], int* studentIndex, char title[]);
+
+void displayAdmissionMenu(void);
 void bookUniversityAdmission(student_t admissionList[], int* admissionIndex);
 void admission(student_t admissionList[], int* admissionIndex);
 
@@ -55,3 +58,6 @@ void bookResultAndGraduation(student_t resultAndGraduationsList[], int* resultAn
 void resultAndGraduation(student_t resultAndGraduationsList[], int* resultAndGraduationsIndex);
 
 void displayAllBookingRecords(student_t admissionList[], int* admissionIndex, student_t studentCardList[], int* studentCardIndex, student_t enrollmentAndCourseAdviseList[], int* enrollmentAndCourseAdviseIndex, student_t travelConcessionList[], int* travelConcessionIndex, student_t resultAndGraduationsList[], int* resultAndGraduationsIndex);
+
+void viewStudentHistory(student_t admissionList[], int* admissionIndex, student_t studentCardList[], int* studentCardIndex, student_t enrollmentAndCourseAdviseList[], int* enrollmentAndCourseAdviseIndex, student_t travelConcessionList[], int* travelConcessionIndex, student_t resultAndGraduationsList[], int* resultAndGraduationsIndex);
+
