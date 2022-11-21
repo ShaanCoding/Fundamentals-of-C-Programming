@@ -3,6 +3,13 @@
 #include "main.h"
 #endif
 
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - none
+ * outputs:
+ *     - none
+ *****************************************************************************/
 int main() {
 	student_t admissionList[ARRAY_LENGTH];
 	int admissionIndex = 0;
@@ -20,6 +27,13 @@ int main() {
 	return 0;
 }
 
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - none
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void displayMenu(void) {
 	clear();
 	drawTopLine();
@@ -36,6 +50,16 @@ void displayMenu(void) {
 	drawBottomLine();
 }
 
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - admissionList, admissionIndex, studentCardList, studentCardIndex,
+ 	   - enrollmentAndCourseAdviseList, enrollmentAndCourseAdviseIndex,
+	   - travelConcessionList, travelConcessionIndex, resultAndGraduationsList,
+	   - resultAndGraduationsIndex
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void startApplication(student_t admissionList[], int* admissionIndex, student_t studentCardList[], int* studentCardIndex, student_t enrollmentAndCourseAdviseList[], int* enrollmentAndCourseAdviseIndex, student_t travelConcessionList[], int* travelConcessionIndex, student_t resultAndGraduationsList[], int* resultAndGraduationsIndex) {
 	/* Call main application */
 	displayMenu();
@@ -89,8 +113,17 @@ void startApplication(student_t admissionList[], int* admissionIndex, student_t 
 	}
 }
 
-void displayAllBookingRecords(student_t admissionList[], int* admissionIndex, student_t studentCardList[], int* studentCardIndex, student_t enrollmentAndCourseAdviseList[], int* enrollmentAndCourseAdviseIndex, student_t travelConcessionList[], int* travelConcessionIndex, student_t resultAndGraduationsList[], int* resultAndGraduationsIndex)
-{
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - admissionList, admissionIndex, studentCardList, studentCardIndex,
+ 	   - enrollmentAndCourseAdviseList, enrollmentAndCourseAdviseIndex,
+	   - travelConcessionList, travelConcessionIndex, resultAndGraduationsList,
+	   - resultAndGraduationsIndex
+ * outputs:
+ *     - none
+ *****************************************************************************/
+void displayAllBookingRecords(student_t admissionList[], int* admissionIndex, student_t studentCardList[], int* studentCardIndex, student_t enrollmentAndCourseAdviseList[], int* enrollmentAndCourseAdviseIndex, student_t travelConcessionList[], int* travelConcessionIndex, student_t resultAndGraduationsList[], int* resultAndGraduationsIndex) {
 	int i;
 	clear();
 	drawTopLine();
@@ -139,6 +172,13 @@ void displayAllBookingRecords(student_t admissionList[], int* admissionIndex, st
 	readkey("Press any key to continue...");
 }
 
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - studentList, studentIndex
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void createStudent(student_t studentList[] , int* studentIndex) {
 	student_t student;
 	student.name[0] = '\0';
@@ -202,6 +242,13 @@ void createStudent(student_t studentList[] , int* studentIndex) {
 	*studentIndex = *studentIndex + 1;
 }
 
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - admissionList, admissionIndex, index
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void listQueue(student_t studentList[], int* studentIndex, char title[]) {
 	clear();
 	drawTopLine();
@@ -225,6 +272,13 @@ void listQueue(student_t studentList[], int* studentIndex, char title[]) {
 	readkey("Press any key to continue...");
 }
 
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - studentList, studentIndex, title
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void cancelQueue(student_t studentList[], int* studentIndex, char title[]) {
 	char* studentID = readStringWithLimit("Enter student ID: ", STRING_LENGTH);
 	int i;
@@ -245,8 +299,14 @@ void cancelQueue(student_t studentList[], int* studentIndex, char title[]) {
 	readkey("Press any key to continue...");
 }
 
-
-void displayAdmissionMenu() {
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - none
+ * outputs:
+ *     - none
+ *****************************************************************************/
+void displayAdmissionMenu(void) {
 	clear();
 	drawTopLine();
 	drawTitle("Admission");
@@ -258,17 +318,37 @@ void displayAdmissionMenu() {
 	drawBottomLine();
 }
 
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - admissionList, admissionIndex
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void bookUniversityAdmission(student_t admissionList[], int* admissionIndex) {
 	createStudent(admissionList, admissionIndex);
 	printfSuccess("Admission booked successfully");
 	readkey("Press any key to continue...");
 }
 
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - admissionList, admissionIndex
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void cancelUniversityAdmission(student_t admissionList[], int* admissionIndex) {
 	cancelQueue(admissionList, admissionIndex, "Admission");
 }
 
-/* Admissions */
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - admissionList, admissionIndex
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void admission(student_t admissionList[], int* admissionIndex) {
 	/* Call admission application */
 	displayAdmissionMenu();
@@ -303,8 +383,14 @@ void admission(student_t admissionList[], int* admissionIndex) {
 	}
 }
 
-/* Student Card */
-void displayStudentCardMenu() {
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - none
+ * outputs:
+ *     - none
+ *****************************************************************************/
+void displayStudentCardMenu(void) {
 	clear();
 	drawTopLine();
 	drawTitle("Student Card");
@@ -316,17 +402,37 @@ void displayStudentCardMenu() {
 	drawBottomLine();
 }
 
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - studentCardList, studentCardIndex
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void bookStudentCard(student_t studentCardList[], int* studentCardIndex) {
 	createStudent(studentCardList, studentCardIndex);
 	printfSuccess("Student card booked successfully");
 	readkey("Press any key to continue...");
 }
 
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - studentCardList, studentCardIndex
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void cancelStudentCard(student_t studentCardList[], int* studentCardIndex) {
 	cancelQueue(studentCardList, studentCardIndex, "Student Card");
 }
 
-/* Student Card */
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - studentCardList, studentCardIndex
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void studentCard(student_t studentCardList[], int* studentCardIndex) {
 	/* Call student card application */
 	displayStudentCardMenu();
@@ -361,8 +467,14 @@ void studentCard(student_t studentCardList[], int* studentCardIndex) {
 	}
 }
 
-/* EnrollmentCourseAdvise */
-void displayEnrollmentCourseAdviseMenu() {
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - none
+ * outputs:
+ *     - none
+ *****************************************************************************/
+void displayEnrollmentCourseAdviseMenu(void) {
 	clear();
 	drawTopLine();
 	drawTitle("Enrollment Course Advise");
@@ -374,17 +486,37 @@ void displayEnrollmentCourseAdviseMenu() {
 	drawBottomLine();
 }
 
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - enrollmentCourseAdviseList, enrollmentCourseAdviseIndex
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void bookEnrollmentCourseAdvise(student_t enrollmentCourseAdviseList[], int* enrollmentCourseAdviseIndex) {
 	createStudent(enrollmentCourseAdviseList, enrollmentCourseAdviseIndex);
 	printfSuccess("Enrollment course advise booked successfully");
 	readkey("Press any key to continue...");
 }
 
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - enrollmentCourseAdviseList, enrollmentCourseAdviseIndex
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void cancelEnrollmentCourseAdvise(student_t enrollmentCourseAdviseList[], int* enrollmentCourseAdviseIndex) {
 	cancelQueue(enrollmentCourseAdviseList, enrollmentCourseAdviseIndex, "Enrollment Course Advise");
 }
 
-/* EnrollmentCourseAdvise */
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - enrollmentCourseAdviseList, enrollmentCourseAdviseIndex
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void enrollmentCourseAdvise(student_t enrollmentCourseAdviseList[], int* enrollmentCourseAdviseIndex) {
 	/* Call enrollment course advise application */
 	displayEnrollmentCourseAdviseMenu();
@@ -419,8 +551,14 @@ void enrollmentCourseAdvise(student_t enrollmentCourseAdviseList[], int* enrollm
 	}
 }
 
-/* TravelConcession */
-void displayTravelConcessionMenu() {
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - none
+ * outputs:
+ *     - none
+ *****************************************************************************/
+void displayTravelConcessionMenu(void) {
 	clear();
 	drawTopLine();
 	drawTitle("Travel Concession");
@@ -432,17 +570,37 @@ void displayTravelConcessionMenu() {
 	drawBottomLine();
 }
 
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - travelConcessionList, travelConcessionIndex
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void bookTravelConcession(student_t travelConcessionList[], int* travelConcessionIndex) {
 	createStudent(travelConcessionList, travelConcessionIndex);
 	printfSuccess("Travel concession booked successfully");
 	readkey("Press any key to continue...");
 }
 
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - travelConcessionList, travelConcessionIndex
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void cancelTravelConcession(student_t travelConcessionList[], int* travelConcessionIndex) {
 	cancelQueue(travelConcessionList, travelConcessionIndex, "Travel Concession");
 }
 
-/* TravelConcession */
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - travelConcessionList, travelConcessionIndex
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void travelConcession(student_t travelConcessionList[], int* travelConcessionIndex) {
 	/* Call travel concession application */
 	displayTravelConcessionMenu();
@@ -477,8 +635,14 @@ void travelConcession(student_t travelConcessionList[], int* travelConcessionInd
 	}
 }
 
-/* ResultAndGraduation */
-void displayResultAndGraduationMenu() {
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - none
+ * outputs:
+ *     - none
+ *****************************************************************************/
+void displayResultAndGraduationMenu(void) {
 	clear();
 	drawTopLine();
 	drawTitle("Result And Graduation");
@@ -490,17 +654,37 @@ void displayResultAndGraduationMenu() {
 	drawBottomLine();
 }
 
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - resultAndGraduationList, resultAndGraduationIndex
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void bookResultAndGraduation(student_t resultAndGraduationList[], int* resultAndGraduationIndex) {
 	createStudent(resultAndGraduationList, resultAndGraduationIndex);
 	printfSuccess("Result and graduation booked successfully");
 	readkey("Press any key to continue...");
 }
 
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - resultAndGraduationList, resultAndGraduationIndex
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void cancelResultAndGraduation(student_t resultAndGraduationList[], int* resultAndGraduationIndex) {
 	cancelQueue(resultAndGraduationList, resultAndGraduationIndex, "Result And Graduation");
 }
 
-/* ResultAndGraduation */
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - resultAndGraduationList, resultAndGraduationIndex
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void resultAndGraduation(student_t resultAndGraduationList[], int* resultAndGraduationIndex) {
 	/* Call result and graduation application */
 	displayResultAndGraduationMenu();
@@ -535,7 +719,16 @@ void resultAndGraduation(student_t resultAndGraduationList[], int* resultAndGrad
 	}
 }
 
-/* View Student History */
+/******************************************************************************
+ * This method is the main method of the program.
+ * inputs:
+ *     - admissionList, admissionIndex, studentCardList, studentCardIndex,
+ 	   - enrollmentAndCourseAdviseList, enrollmentAndCourseAdviseIndex,
+	   - travelConcessionList, travelConcessionIndex, resultAndGraduationsList,
+	   - resultAndGraduationsIndex
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void viewStudentHistory(student_t admissionList[], int* admissionIndex, student_t studentCardList[], int* studentCardIndex, student_t enrollmentAndCourseAdviseList[], int* enrollmentAndCourseAdviseIndex, student_t travelConcessionList[], int* travelConcessionIndex, student_t resultAndGraduationsList[], int* resultAndGraduationsIndex) {
 	char* studentID = readString("Select student ID: ");
 

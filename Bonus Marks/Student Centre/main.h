@@ -49,19 +49,19 @@ void displayAdmissionMenu(void);
 void bookUniversityAdmission(student_t admissionList[], int* admissionIndex);
 void admission(student_t admissionList[], int* admissionIndex);
 
-void displayStudentCardMenu();
+void displayStudentCardMenu(void);
 void bookStudentCard(student_t studentCardList[], int* studentCardIndex);
 void studentCard(student_t studentCardList[], int* studentCardIndex);
 
-void displayEnrollmentAndCourseAdviseMenu();
+void displayEnrollmentAndCourseAdviseMenu(void);
 void bookEnrollmentAndCourseAdvise(student_t enrollmentAndCourseAdviseList[], int* enrollmentAndCourseAdviseIndex);
 void enrollmentCourseAdvise(student_t enrollmentAndCourseAdviseList[], int* enrollmentAndCourseAdviseIndex);
 
-void displayTravelConcessionMenu();
+void displayTravelConcessionMenu(void);
 void bookTravelConcession(student_t travelConcessionList[], int* travelConcessionIndex);
 void travelConcession(student_t travelConcessionList[], int* travelConcessionIndex);
 
-void displayResultAndGraduationMenu();
+void displayResultAndGraduationMenu(void);
 void bookResultAndGraduation(student_t resultAndGraduationsList[], int* resultAndGraduationsIndex);
 void resultAndGraduation(student_t resultAndGraduationsList[], int* resultAndGraduationsIndex);
 
