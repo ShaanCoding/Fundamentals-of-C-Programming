@@ -1,3 +1,6 @@
+/*******************************************************************************
+ * List header files 
+*******************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -12,6 +15,10 @@
 #include "userInput.h"
 #endif
 
+
+/*******************************************************************************
+ * List preprocessing directives
+*******************************************************************************/
 #define STRING_LENGTH 50
 #define ARRAY_LENGTH 500
 
@@ -24,10 +31,11 @@ struct student {
     char course[STRING_LENGTH];
 };
 typedef struct student student_t;
-  
-/* User needs to: Book a ticket for category, see number of people in queue, cancel ticket and view all booking records */
 
-/* Function prototypes */
+
+/*******************************************************************************
+ * Function prototypes
+*******************************************************************************/
 int main(void);
 
 void displayMenu(void);
