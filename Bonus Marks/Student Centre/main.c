@@ -44,7 +44,8 @@ void displayMenu(void) {
 	drawBody("3. Enrollment and Course Advise");
 	drawBody("4. Travel Concessions");
 	drawBody("5. Result and Graduation");
-	drawBody("6. Exit");
+	drawBody("6. Display All Bookings");
+	drawBody("7. Exit");
 	drawBottomLine();
 }
 
@@ -82,6 +83,11 @@ void startApplication(student_t admissionList[], int* admissionIndex, student_t 
 			startApplication(admissionList, admissionIndex, studentCardList, studentCardIndex, enrollmentAndCourseAdviseList, enrollmentAndCourseAdviseIndex, travelConcessionList, travelConcessionIndex, resultAndGraduationsList, resultAndGraduationsIndex);
 			break;
 		case 6:
+			/* Call display all bookings */
+			displayAllBookingRecords(admissionList, admissionIndex, studentCardList, studentCardIndex, enrollmentAndCourseAdviseList, enrollmentAndCourseAdviseIndex, travelConcessionList, travelConcessionIndex, resultAndGraduationsList, resultAndGraduationsIndex);
+			startApplication(admissionList, admissionIndex, studentCardList, studentCardIndex, enrollmentAndCourseAdviseList, enrollmentAndCourseAdviseIndex, travelConcessionList, travelConcessionIndex, resultAndGraduationsList, resultAndGraduationsIndex);
+			break;
+		case 7:
 			/* Exit */
 			break;
 		default:
@@ -90,6 +96,48 @@ void startApplication(student_t admissionList[], int* admissionIndex, student_t 
 			startApplication(admissionList, admissionIndex, studentCardList, studentCardIndex, enrollmentAndCourseAdviseList, enrollmentAndCourseAdviseIndex, travelConcessionList, travelConcessionIndex, resultAndGraduationsList, resultAndGraduationsIndex);
 		break;
 	}
+}
+
+void displayAllBookingRecords(student_t admissionList[], int* admissionIndex, student_t studentCardList[], int* studentCardIndex, student_t enrollmentAndCourseAdviseList[], int* enrollmentAndCourseAdviseIndex, student_t travelConcessionList[], int* travelConcessionIndex, student_t resultAndGraduationsList[], int* resultAndGraduationsIndex)
+{
+	int i;
+	clear();
+	drawTopLine();
+	drawTitle("All Booking Records");
+	drawBottomLine();
+	drawTopLine();
+	drawBody("Admission");
+	for(i = 0; i < *admissionIndex; i++) {
+		char buffer[100];
+		sprintf(buffer, "%d. %s", i + 1, admissionList[i].name);
+		drawBody(buffer);
+	}
+	drawBottomLine();
+	drawTopLine();
+	drawBody("Student Card");
+	for(i = 0; i < *studentCardIndex; i++) {
+		printf("%d. %s\n", i + 1, studentCardList[i].name);
+	}
+	drawBottomLine();
+	drawTopLine();
+	drawBody("Enrollment and Course Advise");
+	for(i = 0; i < *enrollmentAndCourseAdviseIndex; i++) {
+		printf("%d. %s\n", i + 1, enrollmentAndCourseAdviseList[i].name);
+	}
+	drawBottomLine();
+	drawTopLine();
+	drawBody("Travel Concession");
+	for(i = 0; i < *travelConcessionIndex; i++) {
+		printf("%d. %s\n", i + 1, travelConcessionList[i].name);
+	}
+	drawBottomLine();
+	drawTopLine();
+	drawBody("Result and Graduation");
+	for(i = 0; i < *resultAndGraduationsIndex; i++) {
+		printf("%d. %s\n", i + 1, resultAndGraduationsList[i].name);
+	}
+	drawBottomLine();
+	readkey("Press any key to continue...");
 }
 
 void createStudent(student_t studentList[] , int* studentIndex) {

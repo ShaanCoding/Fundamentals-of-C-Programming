@@ -54,3 +54,4 @@ void displayResultAndGraduationMenu();
 void bookResultAndGraduation(student_t resultAndGraduationsList[], int* resultAndGraduationsIndex);
 void resultAndGraduation(student_t resultAndGraduationsList[], int* resultAndGraduationsIndex);
 
+void displayAllBookingRecords(student_t admissionList[], int* admissionIndex, student_t studentCardList[], int* studentCardIndex, student_t enrollmentAndCourseAdviseList[], int* enrollmentAndCourseAdviseIndex, student_t travelConcessionList[], int* travelConcessionIndex, student_t resultAndGraduationsList[], int* resultAndGraduationsIndex);
