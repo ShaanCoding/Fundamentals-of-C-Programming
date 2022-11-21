@@ -28,7 +28,7 @@ int main() {
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method displays the main menu of the program.
  * inputs:
  *     - none
  * outputs:
@@ -51,7 +51,8 @@ void displayMenu(void) {
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method handles the business logic of the program redirecting it to the
+ * appropriate sub menu.
  * inputs:
  *     - admissionList, admissionIndex, studentCardList, studentCardIndex,
  	   - enrollmentAndCourseAdviseList, enrollmentAndCourseAdviseIndex,
@@ -114,7 +115,7 @@ void startApplication(student_t admissionList[], int* admissionIndex, student_t 
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method shows all current bookings on all categories.
  * inputs:
  *     - admissionList, admissionIndex, studentCardList, studentCardIndex,
  	   - enrollmentAndCourseAdviseList, enrollmentAndCourseAdviseIndex,
@@ -173,7 +174,7 @@ void displayAllBookingRecords(student_t admissionList[], int* admissionIndex, st
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method creates a new student record with validation
  * inputs:
  *     - studentList, studentIndex
  * outputs:
@@ -243,7 +244,7 @@ void createStudent(student_t studentList[] , int* studentIndex) {
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method shows how many students are in the queue waiting for the service.
  * inputs:
  *     - admissionList, admissionIndex, index
  * outputs:
@@ -273,7 +274,7 @@ void listQueue(student_t studentList[], int* studentIndex, char title[]) {
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method deletes a student record from the queue.
  * inputs:
  *     - studentList, studentIndex, title
  * outputs:
@@ -300,7 +301,7 @@ void cancelQueue(student_t studentList[], int* studentIndex, char title[]) {
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method shows the admissionMenu options.
  * inputs:
  *     - none
  * outputs:
@@ -319,7 +320,8 @@ void displayAdmissionMenu(void) {
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method handles the business logic of the adding a student to 
+ * the admission queue.
  * inputs:
  *     - admissionList, admissionIndex
  * outputs:
@@ -332,7 +334,8 @@ void bookUniversityAdmission(student_t admissionList[], int* admissionIndex) {
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method handles the business logic of removing a student from
+ * the admission queue.
  * inputs:
  *     - admissionList, admissionIndex
  * outputs:
@@ -343,7 +346,7 @@ void cancelUniversityAdmission(student_t admissionList[], int* admissionIndex) {
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method handles the business logic of the admission menu.
  * inputs:
  *     - admissionList, admissionIndex
  * outputs:
@@ -384,7 +387,7 @@ void admission(student_t admissionList[], int* admissionIndex) {
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method is displays the student menu options.
  * inputs:
  *     - none
  * outputs:
@@ -403,7 +406,8 @@ void displayStudentCardMenu(void) {
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method handles the business logic of the adding a student to
+ * the student card queue.
  * inputs:
  *     - studentCardList, studentCardIndex
  * outputs:
@@ -416,7 +420,8 @@ void bookStudentCard(student_t studentCardList[], int* studentCardIndex) {
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method handles the business logic of removing a student from
+ * the student card queue.
  * inputs:
  *     - studentCardList, studentCardIndex
  * outputs:
@@ -427,7 +432,7 @@ void cancelStudentCard(student_t studentCardList[], int* studentCardIndex) {
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method handles the business logic of the student card menu.
  * inputs:
  *     - studentCardList, studentCardIndex
  * outputs:
@@ -468,7 +473,7 @@ void studentCard(student_t studentCardList[], int* studentCardIndex) {
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method is displays the enrollment advise menu options.
  * inputs:
  *     - none
  * outputs:
@@ -487,7 +492,8 @@ void displayEnrollmentCourseAdviseMenu(void) {
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method handles the business logic of the adding a student to
+ * the enrollment course advise queue.
  * inputs:
  *     - enrollmentCourseAdviseList, enrollmentCourseAdviseIndex
  * outputs:
@@ -500,7 +506,8 @@ void bookEnrollmentCourseAdvise(student_t enrollmentCourseAdviseList[], int* enr
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method handles the business logic of removing a student from
+ * the enrollment course advise queue.
  * inputs:
  *     - enrollmentCourseAdviseList, enrollmentCourseAdviseIndex
  * outputs:
@@ -511,7 +518,7 @@ void cancelEnrollmentCourseAdvise(student_t enrollmentCourseAdviseList[], int* e
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method handles the business logic of the enrollment course advise menu.
  * inputs:
  *     - enrollmentCourseAdviseList, enrollmentCourseAdviseIndex
  * outputs:
@@ -552,7 +559,7 @@ void enrollmentCourseAdvise(student_t enrollmentCourseAdviseList[], int* enrollm
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method displays the travel concession menu options.
  * inputs:
  *     - none
  * outputs:
@@ -571,7 +578,8 @@ void displayTravelConcessionMenu(void) {
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method handles the business logic of the adding a student to
+ * the travel concession queue.
  * inputs:
  *     - travelConcessionList, travelConcessionIndex
  * outputs:
@@ -584,7 +592,8 @@ void bookTravelConcession(student_t travelConcessionList[], int* travelConcessio
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method handles the business logic of removing a student from
+ * the travel concession queue.
  * inputs:
  *     - travelConcessionList, travelConcessionIndex
  * outputs:
@@ -595,7 +604,7 @@ void cancelTravelConcession(student_t travelConcessionList[], int* travelConcess
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method is handles the business logic of the travel concession menu.
  * inputs:
  *     - travelConcessionList, travelConcessionIndex
  * outputs:
@@ -636,7 +645,7 @@ void travelConcession(student_t travelConcessionList[], int* travelConcessionInd
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method displays the main menu options.
  * inputs:
  *     - none
  * outputs:
@@ -655,7 +664,8 @@ void displayResultAndGraduationMenu(void) {
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method handles the business logic of the adding a student to
+ * the result and graduation queue.
  * inputs:
  *     - resultAndGraduationList, resultAndGraduationIndex
  * outputs:
@@ -668,7 +678,8 @@ void bookResultAndGraduation(student_t resultAndGraduationList[], int* resultAnd
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method handles the business logic of removing a student from
+ * the result and graduation queue.
  * inputs:
  *     - resultAndGraduationList, resultAndGraduationIndex
  * outputs:
@@ -679,7 +690,7 @@ void cancelResultAndGraduation(student_t resultAndGraduationList[], int* resultA
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method is handles the business logic of the result and graduation menu.
  * inputs:
  *     - resultAndGraduationList, resultAndGraduationIndex
  * outputs:
@@ -720,7 +731,7 @@ void resultAndGraduation(student_t resultAndGraduationList[], int* resultAndGrad
 }
 
 /******************************************************************************
- * This method is the main method of the program.
+ * This method displays the student information of a specific student.
  * inputs:
  *     - admissionList, admissionIndex, studentCardList, studentCardIndex,
  	   - enrollmentAndCourseAdviseList, enrollmentAndCourseAdviseIndex,
