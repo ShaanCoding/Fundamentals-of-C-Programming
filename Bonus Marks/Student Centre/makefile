@@ -2,9 +2,10 @@ CC = gcc
 CFLAGS = -Wall -Werror -ansi
 LDFLAGS = -lm
 
-program: main.o userInput.o menu.o
+program: prepare main.o userInput.o menu.o
 	$(CC) $(CFLAGS) out/main.o out/userInput.o out/menu.o $(LDFLAGS) -o program 
-
+prepare:
+	mkdir -p out
 main.o: main.c main.h
 	$(CC) $(CFLAGS) -o out/main.o -c main.c
 userInput.o: userInput.c userInput.h
