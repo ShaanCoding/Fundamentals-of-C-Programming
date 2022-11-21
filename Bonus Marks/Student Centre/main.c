@@ -208,10 +208,18 @@ void listQueue(student_t studentList[], int* studentIndex, char title[]) {
 	drawTopLine();
 	drawTitle(title);
 	drawBottomLine();
-	int i;
-	for(i = 0; i < *studentIndex; i++) {
-		drawBody(studentList[i].name);
+	if(*studentIndex == 0) {
+		drawBody("There is no students in the queue.");
+	} else {
+		char buffer[100];
+		sprintf(buffer, "Students in the queue: %d", *studentIndex);
+		drawBody(buffer);
+		int i;
+		for(i = 0; i < *studentIndex; i++) {
+			drawBody(studentList[i].name);
+		}
 	}
+	
 	drawBottomLine();
 	readkey("Press any key to continue...");
 }
