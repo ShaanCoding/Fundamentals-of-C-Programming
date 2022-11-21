@@ -2,7 +2,7 @@
 /**************************************************************
  * FileName: UserInput.c
  * Description: This file provide a input libary to get user input
- * @Author: Zhicheng Lin
+ * @Author: Mohammed Shaan Shahroze Khan (13940236) 
  * Change Logs: 
     |Date           |Description                               |
     |2022-10-20     | Upload function to read user input       |
@@ -18,8 +18,16 @@
 #define __USERINPUT_H__
 #include "userInput.h"
 #endif
-int readInt(const char promp[]){
-    printfPrompt(promp);
+
+/******************************************************************************
+ * This method read user input and return the input.
+ * inputs:
+ *     - prompt: the prompt will be displayed to user.
+ * outputs:
+ *     - input: the input from user.
+ *****************************************************************************/
+int readInt(const char prompt[]){
+    printfPrompt(prompt);
     int temp;
     scanf(" %d",&temp);
     scanf("%*[^\n]");
@@ -27,16 +35,31 @@ int readInt(const char promp[]){
     return temp;
 }
 
-double readDouble(const char promp[]){
-    printfPrompt(promp);
+/******************************************************************************
+ * This method read user input and return the input.
+ * inputs:
+ *     - prompt: the prompt will be displayed to user.
+ * outputs:
+ *     - input: the input from user.
+ *****************************************************************************/
+double readDouble(const char prompt[]){
+    printfPrompt(prompt);
     double temp;
     scanf(" %lf",&temp);
     scanf("%*[^\n]");
     fflush(stdin);
     return temp;
 }
-char* readString(const char promp[]){
-    printfPrompt(promp);
+
+/******************************************************************************
+ * This method read user input and return the input.
+ * inputs:
+ *     - prompt: the prompt will be displayed to user.
+ * outputs:
+ *     - input: the input from user.
+ *****************************************************************************/
+char* readString(const char prompt[]){
+    printfPrompt(prompt);
     char* content = (char*) malloc(sizeof(char)*FILENAMELENGTH);
     scanf(" %[^\n\t]",content);
     scanf("%*[^\n]");
@@ -44,15 +67,29 @@ char* readString(const char promp[]){
     return content;
 }
 
-char readkey(const char promp[]){
-    printf("%s ",promp);
+/******************************************************************************
+ * This method read user input and return the input.
+ * inputs:
+ *     - prompt: the prompt will be displayed to user.
+ * outputs:
+ *     - input: the input from user.
+ *****************************************************************************/
+char readkey(const char prompt[]){
+    printf("%s ",prompt);
     getchar();
     return getchar();
 }
 
-char* readStringWithLimit(const char promp[], int length) {
+/******************************************************************************
+ * This method read user input and return the input.
+ * inputs:
+ *     - prompt: the prompt will be displayed to user.
+ * outputs:
+ *     - input: the input from user.
+ *****************************************************************************/
+char* readStringWithLimit(const char prompt[], int length) {
     char* content = (char*) malloc(sizeof(char)*length);
-    printfPrompt(promp);
+    printfPrompt(prompt);
 
     char buffer[255];
 
@@ -67,4 +104,3 @@ char* readStringWithLimit(const char promp[], int length) {
     strcpy(content, buffer);
     return content;
 }
-

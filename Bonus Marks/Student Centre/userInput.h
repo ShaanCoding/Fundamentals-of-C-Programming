@@ -5,17 +5,18 @@
 #include <stdlib.h> 
 #include <string.h> 
 
+
 /*******************************************************************************
  * List preprocessing directives
 *******************************************************************************/
 #define FILENAMELENGTH 50
 
+
 /*******************************************************************************
  * Function prototypes
 *******************************************************************************/
-int readInt(const char promp[]);
-double readDouble(const char promp[]);
-char* readString(const char promp[]);
-char* readStringWithLimit(const char promp[], int length);
-char readkey(const char promp[]);
-
+int readInt(const char prompt[]);
+double readDouble(const char prompt[]);
+char* readString(const char prompt[]);
+char* readStringWithLimit(const char prompt[], int length);
+char readkey(const char prompt[]);

@@ -2,8 +2,8 @@
 /**************************************************************
  * FileName: Menu.c
  * Description: This file provide a menu library that create 
- a table.
- * @Author: Zhicheng Lin
+   a table.
+ * @Author: Mohammed Shaan Shahroze Khan (13940236)
  * Change Logs: 
     |Date           |Description                               |
     |2022-10-25     | Upload function to draw a table          |
@@ -56,7 +56,6 @@ void drawBottomLine() {
  * outputs:
  *     - none
  *****************************************************************************/
-
 void drawTitle(char content[]){
     int length = strlen(content);
     int numberOfSpace = (WIDTH-2-length)/2;
@@ -72,7 +71,6 @@ void drawTitle(char content[]){
    
     printf("║\n");
 }
-
 
 /******************************************************************************
  * This method draw body of table, and align content to left and set padding to 4
@@ -91,6 +89,14 @@ void drawBody(char content[]){
     printf("║\n");
 }
 
+/******************************************************************************
+ * This method draw body of table, align content and sets padding to 4
+ * Will print output text in green color / blue color
+ * inputs:
+ *     - message: the content will be displayed 
+ * outputs:
+ *     - none
+ *****************************************************************************/
 void drawBodySuccess(char content[]) {
     int length = strlen(content);
     int numberOfSpace = WIDTH - BODYINDENT - length - 4;
@@ -100,7 +106,6 @@ void drawBodySuccess(char content[]) {
     printf("%*s",numberOfSpace," ");
     printf("║\n");
 }
-
 
 /******************************************************************************
  * This method draw table header with title
@@ -141,9 +146,13 @@ void printfSuccess(const char message[]){
   printf("\n\033[46;37;1m %s \033[0m\n",message);
 }
 
+/******************************************************************************
+ * This method read user input and return the input.
+ * inputs:
+ *     - prompt: the prompt will be displayed to user.
+ * outputs:
+ *     - input: the input from user.
+ *****************************************************************************/
 void printfPrompt(const char message[]){
   printf("\n\033[44;37;1m %s \033[0m ",message);
 }
-
-
-
